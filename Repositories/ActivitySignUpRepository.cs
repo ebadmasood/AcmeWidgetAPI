@@ -41,7 +41,7 @@ namespace AcmeWidgetAPI.Repositories
         public async Task<bool> Update(int id, ActivitySignUpForm details)
         {
             var form = await _context.ActivitySignUpForms.FindAsync(id);
-            if(form != null && form.Id == details.Id)
+            if(form != null)
             {
                 form.FirstName = details.FirstName;
                 form.LastName = details.LastName;
