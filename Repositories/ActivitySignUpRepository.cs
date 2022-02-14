@@ -23,14 +23,17 @@ namespace AcmeWidgetAPI.Repositories
 
         public async Task Delete(int id)
         {
-            var form = await _context.ActivitySignUpForms.FindAsync(id);
-            _context.ActivitySignUpForms.Remove(form);
-            await _context.SaveChangesAsync();
+            var form = await _context.ActivitySignUpForms.FirstOrDefaultAsync(h => h.Id == id);
+            if (form != null)
+            {
+                _context.ActivitySignUpForms.Remove(form);
+                await _context.SaveChangesAsync();
+            }
         }
 
         public async Task<ActivitySignUpForm> Get(int id)
         {
-            return await _context.ActivitySignUpForms.FindAsync(id);
+            return await _context.ActivitySignUpForms.FirstOrDefaultAsync(h => h.Id == id);
         }
 
         public async Task<IEnumerable<ActivitySignUpForm>> GetAllSignUpForms()
